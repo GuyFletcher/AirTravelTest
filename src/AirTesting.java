@@ -16,32 +16,24 @@ public class AirTesting {
 	//user@phptravels.com
 	//demouser
 	
-
+	WebDriver driver;
+	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
+		
 	}
 
 	@Before
 	public void setUp() throws Exception {
 		
-		
-	}
-
-	@After
-	public void tearDown() throws Exception {
-		
-	}
-
-	@Test
-	public void testLogIn() throws InterruptedException {
-		
 		System.setProperty("webdriver.gecko.driver", "C:\\Users\\Tamerai\\Desktop\\AirTravelTest\\geckodriver-v0.15.0-win32\\geckodriver.exe");
 		
-		WebDriver driver = new FirefoxDriver();
+		driver = new FirefoxDriver();
 		
 		driver.get("http://www.phptravels.net/");
 		
@@ -65,11 +57,30 @@ public class AirTesting {
 		accountLink = driver.findElement(By.xpath("/html/body/div[3]/div[1]/form/div[4]/button"));
 		accountLink.click();
 		
-		Thread.sleep(10000); //wait for page to load
+	}
+
+	@After
+	public void tearDown() throws Exception {
 		
+	}
+
+	@Test
+	public void testLogIn() throws InterruptedException {
+		
+		Thread.sleep(10000); //wait for page to load
+				
 		WebElement text = driver.findElement(By.xpath("/html/body/div[3]/div[1]/div/div[1]/h3"));
 		
 		assertEquals("Hi, John Smith",text.getText());
+		
+	}
+	
+	@Test
+	public void testOrder() throws InterruptedException {
+		
+		Thread.sleep(10000); //wait for page to load
+		
+		WebElement text = driver.findElement(By.xpath("/html/body/div[3]/div[1]/div/div[1]/h3"));
 		
 	}
 
