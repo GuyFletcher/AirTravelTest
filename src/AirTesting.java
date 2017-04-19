@@ -76,7 +76,7 @@ public class AirTesting {
 		
 	}
 	
-	@Test
+	@Ignore
 	public void testCorrectHotel() throws InterruptedException {
 		
 		Thread.sleep(10000); //wait for page to load
@@ -109,6 +109,30 @@ public class AirTesting {
 		
 		assertEquals("Dee Marks Hotel & Resorts",text.getText());
 		
+		driver.close();
+	}
+	
+	@Test
+	public void testChangeLanguage() throws InterruptedException {
+		
+		Thread.sleep(10000); //wait for page to load
+				
+		WebElement text = driver.findElement(By.xpath("/html/body/div[2]/div/div/div[2]/ul/li[1]/a"));
+		
+		assertEquals("English",text.getText());
+		
+		text.click();
+		
+		text = driver.findElement(By.xpath("/html/body/div[2]/div/div/div[2]/ul/li[1]/ul/li[7]/a"));
+		text.click();
+		
+		Thread.sleep(5000);
+		
+		text = driver.findElement(By.xpath("/html/body/div[2]/div/div/div[2]/ul/li[1]/a"));
+		
+		assertEquals("Spanish",text.getText());
+		
+		driver.close();
 	}
 
 }
