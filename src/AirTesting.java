@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -64,7 +65,7 @@ public class AirTesting {
 		
 	}
 
-	@Test
+	@Ignore
 	public void testLogIn() throws InterruptedException {
 		
 		Thread.sleep(10000); //wait for page to load
@@ -76,11 +77,37 @@ public class AirTesting {
 	}
 	
 	@Test
-	public void testOrder() throws InterruptedException {
+	public void testCorrectHotel() throws InterruptedException {
 		
 		Thread.sleep(10000); //wait for page to load
 		
-		WebElement text = driver.findElement(By.xpath("/html/body/div[3]/div[1]/div/div[1]/h3"));
+		WebElement clicker = driver.findElement(By.xpath("/html/body/nav[1]/div/div/div/ul/li[2]/a"));
+		clicker.click();
+		
+		Thread.sleep(5000); //wait for page to load
+		
+		clicker = driver.findElement(By.xpath("/html/body/div[5]/div[3]/div/table/tbody/tr[1]/td/div/div[2]/div/div[1]/a/button"));
+		clicker.click();
+		
+		Thread.sleep(5000); //wait for page to load
+		
+		clicker = driver.findElement(By.xpath("/html/body/div[4]/div[2]/section/form[3]/div/div[2]/div[1]/div[2]/span"));
+		clicker.click();
+		
+		Thread.sleep(5000); //wait for page to load
+		
+		WebElement text = driver.findElement(By.xpath("/html/body/div[5]/div[3]/div/table/tbody/tr[1]/td/div/div[2]/div/div[2]/h4/a/b"));
+		
+		assertEquals("Dee Marks Hotel & Resorts", text.getText());
+		
+		clicker = driver.findElement(By.xpath("/html/body/div[5]/div[3]/div/table/tbody/tr[1]/td/div/div[2]/div/div[1]/a/button"));
+		clicker.click();
+		
+		Thread.sleep(5000); //wait for page to load
+		
+		text = driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[1]/div[1]/div/strong"));
+		
+		assertEquals("Dee Marks Hotel & Resorts",text.getText());
 		
 	}
 
