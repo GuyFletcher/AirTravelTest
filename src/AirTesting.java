@@ -32,7 +32,7 @@ public class AirTesting {
 	@Before
 	public void setUp() throws Exception {
 		
-		System.setProperty("webdriver.gecko.driver", "C:\\Users\\Tamerai\\Desktop\\AirTravelTest\\geckodriver-v0.15.0-win32\\geckodriver.exe");
+		System.setProperty("webdriver.gecko.driver", "/opt/code/AirTravelTest/geckodriver");
 		
 		driver = new FirefoxDriver();
 		
@@ -112,7 +112,7 @@ public class AirTesting {
 		driver.close();
 	}
 	
-	@Test
+	@Ignore
 	public void testChangeLanguage() throws InterruptedException {
 		
 		Thread.sleep(10000); //wait for page to load
@@ -132,6 +132,44 @@ public class AirTesting {
 		
 		assertEquals("Spanish",text.getText());
 		
+		driver.close();
+	}
+	
+	@Test
+	public void testContactUs() throws InterruptedException {
+		
+		Thread.sleep(10000); //wait for page to load
+				
+		WebElement clicker = driver.findElement(By.xpath("/html/body/nav[1]/div/div/div/ul/li[8]/a"));
+				
+		clicker.click();
+				
+		Thread.sleep(5000);
+		
+		WebElement nameBox = driver.findElement(By.xpath("/html/body/div[3]/div/div/div/form/div[1]/div[2]/input[1]"));
+		nameBox.clear();
+		nameBox.sendKeys("Jonah Allibone");
+		
+		WebElement emailBox = driver.findElement(By.xpath("/html/body/div[3]/div/div/div/form/div[1]/div[2]/input[2]"));
+		emailBox.clear();
+		emailBox.sendKeys("jonah.allibone@mymail.champlain.edu");
+		
+		WebElement subjectBox = driver.findElement(By.xpath("/html/body/div[3]/div/div/div/form/div[1]/div[2]/input[3]"));
+		subjectBox.clear();
+		subjectBox.sendKeys("Test submission");
+		
+		WebElement messageBox = driver.findElement(By.xpath("/html/body/div[3]/div/div/div/form/div[1]/div[3]/textarea"));
+		messageBox.clear();
+		messageBox.sendKeys("Test message");
+		
+		WebElement sendButton = driver.findElement(By.xpath("/html/body/div[3]/div/div/div/form/div[2]/input"));
+		sendButton.click();
+		
+		Thread.sleep(5000);
+		
+		WebElement successText = driver.findElement(By.xpath("/html/body/div[3]/div/div/div/form/div[1]/div[1]"));
+		
+		assertEquals("Message Sent Successfully", successText.getText());	
 		driver.close();
 	}
 
