@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
 
 public class AirTesting {
 	
@@ -135,7 +136,7 @@ public class AirTesting {
 		driver.close();
 	}
 	
-	@Test
+	@Ignore
 	public void testContactUs() throws InterruptedException {
 		
 		Thread.sleep(10000); //wait for page to load
@@ -170,6 +171,23 @@ public class AirTesting {
 		WebElement successText = driver.findElement(By.xpath("/html/body/div[3]/div/div/div/form/div[1]/div[1]"));
 		
 		assertEquals("Message Sent Successfully", successText.getText());	
+		driver.close();
+	}
+	
+	@Test
+	public void testCurrencyChange() throws InterruptedException {
+		
+		Thread.sleep(10000); //wait for page to load
+				
+		Select dropdown = new Select(driver.findElement(By.xpath(".//*[@id='currency']")));
+		dropdown.selectByVisibleText("EUR");		
+		
+		Thread.sleep(10000);
+		
+		Select dropdown2 = new Select(driver.findElement(By.xpath(".//*[@id='currency']")));
+		WebElement option = dropdown2.getFirstSelectedOption();
+		
+		assertEquals("EUR", option.getText());
 		driver.close();
 	}
 
